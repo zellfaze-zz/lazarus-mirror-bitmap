@@ -109,8 +109,16 @@ begin
   Result.canvas.font.color       := font.color;
 
   //Determine the needed dimensions
-  neededHeight := Abs(Result.canvas.TextWidth(inputString));
-  neededWidth  := Abs(Result.canvas.TextHeight(inputString));
+  if ((Result.canvas.font.Orientation = 900) or (Result.canvas.font.Orientation = 2700)) then
+  begin
+    neededHeight := Abs(Result.canvas.TextWidth(inputString));
+    neededWidth  := Abs(Result.canvas.TextHeight(inputString));
+  end
+  else
+  begin
+    neededWidth  := Abs(Result.canvas.TextWidth(inputString));
+    neededHeight := Abs(Result.canvas.TextHeight(inputString));
+  end; 
 
   //Set the image dimensions
   Result.Width  := neededWidth;
