@@ -94,8 +94,6 @@ end;
 
 function mirrorText(inputString: String; pen: TPen; font: TFont; direction: TMirrorDirection; screenDPI: Integer; printDPI: Integer): TBitmap;
 var
-  lineHeight:   Integer;
-  charWidth:    Integer;
   neededWidth:  Integer;
   neededHeight: Integer;
   ratio:        extended;
@@ -111,12 +109,8 @@ begin
   Result.canvas.font.color       := font.color;
 
   //Determine the needed dimensions
-  //We use I here because it usually the tallest character
-  lineHeight   := Round(1.2 * Abs(Result.canvas.TextHeight('I')));
-  //We use W here because it is usually the widest character
-  charWidth    := Round(1.2 * Abs(Result.canvas.TextWidth('W')));
-  neededHeight := charWidth * length(inputString);
-  neededWidth  := lineHeight;
+  neededHeight := Abs(Result.canvas.TextWidth(inputString));
+  neededWidth  := Abs(Result.canvas.TextHeight(inputString));
 
   //Set the image dimensions
   Result.Width  := neededWidth;
